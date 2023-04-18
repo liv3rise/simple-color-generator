@@ -54,5 +54,6 @@ body {
     &__item {
         border-radius: 20px;
         transition: 0.3s transform;
+        box-shadow: 0 1px 10px 2px rgba(8, 8, 8, 0.465);
     }
 }
