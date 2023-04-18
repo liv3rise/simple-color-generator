@@ -1,0 +1,58 @@
+@import "reset";
+@import "variables";
+
+* {
+    font-family: Verdana, sans-serif;
+}
+
+body {
+    background-color: $primary-bg-color;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+.button {
+    background-color: $elements-color;
+    color: $secondary-text-color;
+    font-size: 20px;
+    padding: 15px;
+    border: none;
+    margin-bottom: 40px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    transition: 0.5s background-color;
+    cursor: pointer;
+
+    &:hover {
+        background-color: lighten($elements-color, 5%);
+    }
+}
+
+.color-items {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+
+    &__item-wrapper {
+        cursor: pointer;
+
+        &:hover {
+            .color-items__item {
+                transform: scale(0.9);
+            }
+        }
+    }
+
+    &__item {
+        border-radius: 20px;
+        transition: 0.3s transform;
+    }
+}
