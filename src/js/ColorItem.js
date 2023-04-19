@@ -1,7 +1,13 @@
+import ClipboardJS from 'clipboard';
+
 class ColorItem {
   constructor(width, height) {
     this.width = width;
     this.height = height;
+    this.color = ColorItem.getRandomHexColor();
+    this.inlineStyle = `width: ${this.width}px; height: ${this.height}px; background-color: ${this.color};`;
+    this.item = this.createItem();
+    this.textNode = this.item.querySelector('.color-items__item-text');
   }
 
   static getRandomHexColor() {
@@ -15,18 +21,31 @@ class ColorItem {
     return hexColor;
   }
 
+  addCopyOnClick(element) {
+    const clipboard = new ClipboardJS(element, {
+      text: () => this.color,
+    });
+
+    clipboard.on('success', () => {
+      this.textNode.innerText = 'copied!';
+
+      setTimeout(() => {
+        this.textNode.innerText = this.color;
+      }, 4000);
+    });
+  }
+
   createItem() {
     const colorItemWrapper = document.createElement('div');
-    const colorItem = document.createElement('div');
-
     colorItemWrapper.classList.add('color-items__item-wrapper');
-    colorItem.classList.add('color-items__item');
+    colorItemWrapper.setAttribute('data-clipboard-text', this.color);
 
-    colorItemWrapper.append(colorItem);
+    colorItemWrapper.innerHTML = `
+      <div class="color-items__item" style="${this.inlineStyle}">
+        <div class="color-items__item-text">${this.color}</div>
+      </div>`;
 
-    colorItem.style.width = `${this.width}px`;
-    colorItem.style.height = `${this.height}px`;
-    colorItem.style.backgroundColor = ColorItem.getRandomHexColor();
+    this.addCopyOnClick(colorItemWrapper);
 
     return colorItemWrapper;
   }

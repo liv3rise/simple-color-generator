@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < numberOfColors; i += 1) {
       const colorItem = new ColorItem(colorItemWidth, colorItemHeight);
 
-      colorItemsContainer.append(colorItem.createItem());
+      colorItemsContainer.append(colorItem.item);
     }
   }
 
